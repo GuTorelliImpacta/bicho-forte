@@ -1,0 +1,26 @@
+{
+  "nome": "Bicho Forte",
+  "descritor": "Pet Shop e Farmácia Veterinária",
+  "url": "https://www.bichoforte.com.br",
+  "endereco": {
+    "rua": "Av. Mal. Mallet, 504",
+    "bairro": "Canto do Forte",
+    "cidade": "Praia Grande",
+    "uf": "SP",
+    "cep": "11700-400"
+  },
+  "telefone": { "exibir": "(13) 3491-4464", "tel": "+551334914464" },
+  "diskRacao": { "exibir": "(13) 3395-0998", "tel": "+551333950998" },
+  "whatsapp": { "exibir": "(13) 98123-6882", "numero": "5513981236882" },
+  "horario": {
+    "abre": 9,
+    "fecha": 20,
+    "dias": [1, 2, 3, 4, 5, 6],
+    "linhas": [
+      { "dias": "Segunda a sábado", "horas": "9h às 20h" },
+      { "dias": "Domingo", "horas": "Fechado" }
+    ]
+  },
+  "rota": "https://www.google.com/maps/dir/?api=1&destination=Av.+Mal.+Mallet,+504,+Canto+do+Forte,+Praia+Grande,+SP,+11700-400",
+  "instagram": "https://www.instagram.com/bichoforte"
+}

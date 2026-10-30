@@ -1,0 +1,20 @@
+---
+import Servico from '../layouts/Servico.astro';
+import img from '../assets/loja-racoes.jpg';
+---
+<Servico
+  title="Farmácia veterinária em Praia Grande | Bicho Forte"
+  description="Farmácia veterinária e produtos de higiene para cães e gatos no Canto do Forte, Praia Grande. Consulte a Bicho Forte pelo WhatsApp."
+  path="/farmacia-veterinaria"
+  h1="Farmácia veterinária."
+  lead="Produtos de higiene e cuidados para o seu bicho. Consulte a disponibilidade pelo WhatsApp."
+  cor="bg-ambar-claro text-marinho"
+  img={img} imgAlt="Prateleiras da Bicho Forte com produtos de higiene e cuidados" imgPos="80% 30%"
+  mensagem="Olá, Bicho Forte! Quero consultar um produto da farmácia veterinária."
+  cta="Consultar produto"
+  secoes={[
+    { h: 'Como funciona', p: ['Diga o nome do produto ou mande uma foto da embalagem ou da receita. Informamos se temos o item e como retirar ou receber.'] },
+    { h: 'Uso responsável', p: ['Medicamentos veterinários são vendidos conforme a legislação e a orientação de um médico-veterinário. Nunca dê remédio de uso humano ao seu bicho sem indicação profissional.', 'Se o seu bicho está doente, procure um veterinário.'] },
+  ]}
+  aviso="Esta página tem caráter informativo e não substitui a consulta com um médico-veterinário."
+/>

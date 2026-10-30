@@ -1,0 +1,20 @@
+---
+import Servico from '../layouts/Servico.astro';
+import img from '../assets/logo.png';
+---
+<Servico
+  title="Banho e tosa em Praia Grande | Bicho Forte"
+  description="Estética canina, banho e tosa no Canto do Forte, Praia Grande. Agende pelo WhatsApp ou telefone com a Bicho Forte."
+  path="/banho-e-tosa"
+  h1="Banho e tosa."
+  lead="Estética canina na loja. Agende pelo WhatsApp e combine o horário para o seu cachorro."
+  cor="bg-aro text-white" escuro
+  img={img} imgAlt="Logo da Bicho Forte com cachorro, gato, periquito, hamster e peixinho" contain
+  mensagem="Olá, Bicho Forte! Quero agendar banho e tosa."
+  cta="Agendar banho e tosa"
+  secoes={[
+    { h: 'Como agendar', p: ['Chame no WhatsApp ou ligue e informe o porte, o tipo de pelo e o serviço que deseja. Combinamos o dia e o horário.', 'Valores e prazos são informados no atendimento.'] },
+    { h: 'Quando levar ao banho e tosa', p: ['A frequência depende do tipo de pelo, do estilo de vida e da orientação do seu veterinário. Pelos longos costumam pedir escovação e tosa regulares para evitar nós; cães que brincam ao ar livre podem precisar de banho com mais frequência.', 'Avise sempre se o seu bicho tem alergia, ferida na pele ou medo de barulho.'] },
+    { h: 'Para o dia do serviço', p: ['Informe o nome e o porte do bicho, vacinas em dia quando solicitado e qualquer cuidado especial. Tire dúvidas pelo WhatsApp antes de vir.'] },
+  ]}
+/>

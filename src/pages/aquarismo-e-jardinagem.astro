@@ -1,0 +1,20 @@
+---
+import Servico from '../layouts/Servico.astro';
+import img from '../assets/loja-prateleiras.jpg';
+---
+<Servico
+  title="Aquarismo e jardinagem em Praia Grande | Bicho Forte"
+  description="Itens de aquarismo, produtos para peixes e jardinagem no Canto do Forte, Praia Grande. Consulte a Bicho Forte."
+  path="/aquarismo-e-jardinagem"
+  h1="Aquarismo e jardinagem."
+  lead="Itens para o seu aquário e produtos de jardinagem, na loja do Canto do Forte."
+  cor="bg-white text-marinho"
+  img={img} imgAlt="Prateleiras da Bicho Forte com acessórios e rações para aves, peixes e roedores" imgPos="80% 65%"
+  mensagem="Olá, Bicho Forte! Quero saber sobre aquarismo."
+  cta="Perguntar sobre aquarismo"
+  secoes={[
+    { h: 'Aquarismo', p: ['Encontre produtos e acessórios para o seu aquário e para a alimentação dos peixes. Consulte pelo WhatsApp para saber o que está disponível.'] },
+    { h: 'Primeiros itens para montar um aquário', p: ['Antes de comprar peixes, prepare o aquário: um recipiente de tamanho adequado, filtro, aquecedor quando a espécie pedir, substrato e um condicionador de água.', 'Deixe o aquário rodando antes de colocar os peixes e pesquise as necessidades de cada espécie. Tire dúvidas na loja.'] },
+    { h: 'Jardinagem', p: ['Também atendemos quem cuida de plantas: consulte os produtos de jardinagem disponíveis na loja.'] },
+  ]}
+/>

@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import "@fontsource/fredoka/latin-500.css";
+@import "@fontsource/fredoka/latin-600.css";
+@import "@fontsource/nunito/latin-400.css";
+@import "@fontsource/nunito/latin-600.css";
+@import "@fontsource/nunito/latin-800.css";
+
+@theme {
+  --color-ceu: #6cd4f7;
+  --color-ceu-claro: #e6f6fd;
+  --color-aro: #153474;
+  --color-marinho: #06174b;
+  --color-ambar: #cd803a;
+  --color-ambar-claro: #f3d9bd;
+  --color-creme: #ffffff;
+  --color-zap: #25d366;
+  --font-display: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Nunito", system-ui, sans-serif;
+}
+
+:root { --raio: 20px; --margem: clamp(16px, 2.2vw, 28px);
+  --t-xl: clamp(2.6rem, 1.6rem + 4vw, 4.75rem);
+  --t-h3: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem); }
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  background: var(--color-ceu-claro);
+  color: var(--color-marinho);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  padding-bottom: 76px;
+}
+@media (min-width: 900px) { body { padding-bottom: 0; } }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.02; letter-spacing: -0.02em; text-wrap: balance; }
+a { text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--color-aro); outline-offset: 3px; border-radius: 6px; }
+.on-dark :focus-visible { outline-color: #fff; }
+
+.pagina { padding-inline: var(--margem); }
+.wrap { max-width: 1440px; margin-inline: auto; }
+
+@layer components {
+/* Botões: um único formato (pílula cheia) */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 52px; padding: 0 1.6rem; border-radius: 999px;
+  font-weight: 800; font-size: 1.0625rem; text-decoration: none; cursor: pointer;
+  transition: transform .18s ease, background-color .18s ease; border: 0;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(1px) scale(.98); }
+.btn-zap { background: var(--color-zap); color: var(--color-marinho); }
+.btn-zap:hover { background: #3fe07f; }
+.btn-ceu { background: var(--color-ceu); color: var(--color-marinho); }
+.btn-ceu:hover { background: #8be0fb; }
+.btn-marinho { background: var(--color-marinho); color: #fff; }
+.btn-marinho:hover { background: var(--color-aro); }
+
+}
+
+/* Faixa de toldo: barras alternadas, preenchidas (SVG, sem gradiente) */
+.toldo {
+  height: 48px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48'%3E%3Crect width='28' height='48' fill='%2306174b'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+}
+.toldo-fino { height: 10px; background-size: 56px 10px; }
+
+/* Entrada ao rolar */
+.rev { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 80ms); }
+.rev.in { opacity: 1; transform: none; }
+.no-js .rev { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .rev { opacity: 1; transform: none; transition: none; }
+  .btn { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Borda serrilhada do talão: dentes preenchidos na cor do papel */
+.dentes {
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 0h28L14 14z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+}

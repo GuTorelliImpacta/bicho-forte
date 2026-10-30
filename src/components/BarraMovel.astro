@@ -1,0 +1,8 @@
+---
+import n from '../data/negocio.json';
+import { zap } from '../data/links';
+---
+<div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-marinho p-2 flex gap-2" style="padding-bottom: max(8px, env(safe-area-inset-bottom))">
+  <a href={zap()} class="btn btn-zap flex-1" data-evento="click_whatsapp">WhatsApp</a>
+  <a href={`tel:${n.telefone.tel}`} class="btn btn-ceu flex-1" data-evento="click_tel">Ligar</a>
+</div>

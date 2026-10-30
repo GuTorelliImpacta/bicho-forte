@@ -1,0 +1,35 @@
+---
+import n from '../data/negocio.json';
+import { nav } from '../data/links';
+const e = n.endereco;
+---
+<footer class="bg-marinho text-white on-dark mt-24">
+  <div class="toldo toldo-fino" aria-hidden="true"></div>
+  <div class="pagina wrap pt-16 pb-10">
+    <p class="font-display font-semibold leading-[.85] tracking-tight text-[clamp(4rem,17vw,15rem)] text-ceu" aria-hidden="true">Bicho Forte</p>
+    <div class="mt-12 grid gap-10 md:grid-cols-3">
+      <div>
+        <h2 class="text-2xl text-white">{n.nome}</h2>
+        <p class="mt-3 text-lg">{n.descritor}<br />{e.rua} – {e.bairro}<br />{e.cidade} – {e.uf}, {e.cep}</p>
+      </div>
+      <div>
+        <h2 class="text-2xl text-white">Fale com a gente</h2>
+        <p class="mt-3 text-lg">
+          WhatsApp: <a class="text-white" href={`https://wa.me/${n.whatsapp.numero}`}>{n.whatsapp.exibir}</a><br />
+          Telefone: <a class="text-white" href={`tel:${n.telefone.tel}`}>{n.telefone.exibir}</a><br />
+          Disk Ração: <a class="text-white" href={`tel:${n.diskRacao.tel}`}>{n.diskRacao.exibir}</a>
+        </p>
+      </div>
+      <div>
+        <h2 class="text-2xl text-white">Horário</h2>
+        <p class="mt-3 text-lg">{n.horario.linhas.map((l) => <><span>{l.dias}: {l.horas}</span><br /></>)}</p>
+      </div>
+    </div>
+    <nav aria-label="Rodapé" class="mt-12 flex flex-wrap gap-x-6 gap-y-2 text-lg">
+      {nav.map((l) => <a class="text-white" href={l.href}>{l.rotulo}</a>)}
+      <a class="text-white" href="/politica-de-privacidade">Privacidade</a>
+      <a class="text-white" href={n.instagram} rel="noopener noreferrer" target="_blank">Instagram</a>
+    </nav>
+    <p class="mt-8 text-base text-ceu-claro">Medicamentos veterinários são vendidos conforme a legislação e a orientação de um médico-veterinário.</p>
+  </div>
+</footer>

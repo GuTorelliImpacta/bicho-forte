@@ -1,0 +1,189 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import n from '../data/negocio.json';
+import { zap } from '../data/links';
+import logo from '../assets/logo.png';
+import dog from '../assets/logo.png';
+import racoes from '../assets/loja-racoes.jpg';
+import prateleiras from '../assets/loja-prateleiras.jpg';
+import fachada from '../assets/fachada.jpg';
+
+const faq = [
+  { q: 'Qual é o horário de funcionamento?', a: 'De segunda a sábado, das 9h às 20h. Aos domingos a loja fica fechada.' },
+  { q: 'Vocês entregam?', a: `Temos o Disk Ração: ligue para ${n.diskRacao.exibir} ou chame no WhatsApp ${n.whatsapp.exibir} e combine a entrega. Consulte a área atendida e o prazo.` },
+  { q: 'Como agendo banho e tosa?', a: 'Pelo WhatsApp ou pelo telefone. Informe o porte e o tipo de pelo do seu bicho e combinamos o horário.' },
+  { q: 'Vocês vendem ração a granel?', a: 'Sim, trabalhamos com ração a granel e embalada. Para saber marcas e preços, consulte pelo WhatsApp.' },
+  { q: 'Atendem aves, peixes e roedores?', a: 'Sim. Além de cães e gatos, temos itens para aves, peixes (aquarismo) e roedores.' },
+  { q: 'Onde fica a loja?', a: `${n.endereco.rua}, ${n.endereco.bairro}, ${n.endereco.cidade} – ${n.endereco.uf}. Use o botão "Ver como chegar" para abrir a rota.` },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'PetStore',
+    '@id': `${n.url}/#loja`,
+    name: n.nome,
+    description: 'Pet shop e farmácia veterinária no Canto do Forte, Praia Grande: rações, banho e tosa, aquarismo, jardinagem e Disk Ração.',
+    url: n.url,
+    image: `${n.url}/og.jpg`,
+    logo: `${n.url}/logo-512.png`,
+    telephone: n.telefone.tel,
+    sameAs: [n.instagram],
+    address: { '@type': 'PostalAddress', streetAddress: n.endereco.rua, addressLocality: n.endereco.cidade, addressRegion: n.endereco.uf, postalCode: n.endereco.cep, addressCountry: 'BR' },
+    openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '20:00' }],
+  },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+];
+
+const folhas = [
+  { t: 'Rações e acessórios', p: 'Para cães, gatos, aves, peixes e roedores. Ração embalada e a granel, coleiras, guias, comedouros e brinquedos. Não achou o que procura? Peça pelo WhatsApp.', href: '/racoes-e-acessorios', cls: 'bg-ceu text-marinho', img: racoes, pos: '30% 55%', alt: 'Corredor de rações da loja Bicho Forte com produtos de higiene nas prateleiras' },
+  { t: 'Farmácia veterinária', p: 'Medicamentos e produtos de higiene para o seu bicho, vendidos conforme a legislação. Em caso de dúvida, converse com um médico-veterinário.', href: '/farmacia-veterinaria', cls: 'bg-ambar-claro text-marinho', img: racoes, pos: '75% 25%', alt: 'Prateleira de produtos de higiene e cuidados na Bicho Forte' },
+  { t: 'Banho e tosa', p: 'Estética canina na loja. Chame no WhatsApp, conte o porte e o tipo de pelo e combine o horário.', href: '/banho-e-tosa', cls: 'bg-aro text-white', img: dog, pos: '50% 50%', alt: 'Logo da Bicho Forte com cachorro, gato, periquito, hamster e peixinho', dark: true, contain: true },
+  { t: 'Aquarismo e jardinagem', p: 'Itens para aquário e para o seu peixe, além de produtos de jardinagem. Passe na loja ou consulte pelo WhatsApp.', href: '/aquarismo-e-jardinagem', cls: 'bg-creme text-marinho', img: prateleiras, pos: '85% 70%', alt: 'Prateleiras com acessórios de aquário e rações na Bicho Forte' },
+];
+---
+<Base
+  title="Bicho Forte Pet Shop | Canto do Forte, Praia Grande"
+  description="Pet shop e farmácia veterinária no Canto do Forte, Praia Grande: rações, banho e tosa, aquarismo, jardinagem e Disk Ração. Chame no WhatsApp."
+  path="/"
+  jsonld={jsonld}
+>
+  <!-- Hero -->
+  <section class="pagina wrap pt-1 pb-6">
+    <div class="grid gap-3 lg:grid-cols-12 lg:min-h-[calc(100svh-96px)]">
+      <div class="order-2 lg:order-1 lg:col-span-7 bg-white rounded-[20px] overflow-hidden flex flex-col">
+        <div class="toldo" aria-hidden="true"></div>
+        <div class="flex-1 flex flex-col justify-center px-6 sm:px-12 py-8 lg:py-12">
+          <h1 class="rev text-[length:var(--t-xl)]">Tudo para o seu bicho.</h1>
+          <p class="rev mt-5 text-xl max-w-[36ch]" style="--i:1">Pertinho de você: pet shop e farmácia veterinária no Canto do Forte, em Praia Grande. Ração, banho e tosa, aquarismo e entrega pelo WhatsApp.</p>
+          <div class="rev mt-7 flex flex-wrap gap-3" style="--i:2">
+            <a href={zap()} class="btn btn-zap" data-evento="click_whatsapp">Chamar no WhatsApp</a>
+            <a href={n.rota} class="btn btn-ceu" rel="noopener noreferrer" target="_blank" data-evento="click_rota">Ver como chegar</a>
+          </div>
+          <p class="rev mt-6 font-bold" style="--i:3"><span data-status data-aberto="false">Segunda a sábado, das 9h às 20h</span></p>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2 lg:col-span-5 bg-ceu rounded-[20px] flex items-center justify-center h-[30svh] lg:h-auto p-4 lg:p-12">
+        <Image src={logo} alt="Logo da Bicho Forte: cachorro, gato, periquito, hamster e peixinho sobre fundo azul" width={640} height={640} loading="eager" fetchpriority="high" class="h-full lg:h-auto w-auto lg:w-full max-w-[640px] rev" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Talão do Disk Ração -->
+  <section id="pedido" class="pagina wrap py-20 lg:py-32">
+    <div class="grid gap-10 lg:grid-cols-12 items-start">
+      <div class="lg:col-span-5">
+        <h2 class="rev text-[length:var(--t-xl)]">Monte o seu pedido.</h2>
+        <p class="rev mt-5 text-xl max-w-[38ch]" style="--i:1">Disk Ração, agora pelo site. Escolha o bicho, diga o que precisa e envie. O pedido chega pronto no WhatsApp da loja; a gente confirma o valor, a entrega e o prazo.</p>
+        <p class="rev mt-4" style="--i:2">Prefere ligar? Disk Ração: <a href={`tel:${n.diskRacao.tel}`} class="font-bold" data-evento="click_tel">{n.diskRacao.exibir}</a>.</p>
+      </div>
+      <div class="lg:col-span-7 rev" style="--i:1">
+        <div class="bg-white rounded-t-[20px]">
+          <div class="toldo toldo-fino rounded-t-[20px]" aria-hidden="true"></div>
+          <form id="pedido-form" class="p-6 sm:p-10 grid gap-6" novalidate>
+            <fieldset class="grid gap-3">
+              <legend class="font-display text-2xl font-semibold mb-1">Para quem é?</legend>
+              <div class="flex flex-wrap gap-2">
+                {['Cachorro','Gato','Ave','Peixe','Roedor'].map((b, i) => (
+                  <label class="cursor-pointer">
+                    <input type="radio" name="bicho" value={b} class="peer sr-only" checked={i === 0} />
+                    <span class="inline-flex min-h-[48px] items-center px-5 rounded-full bg-ceu-claro font-bold peer-checked:bg-marinho peer-checked:text-white peer-focus-visible:outline-3 peer-focus-visible:outline-aro peer-focus-visible:outline-offset-2 transition-colors">{b}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset class="grid gap-3">
+              <legend class="font-display text-2xl font-semibold mb-1">O que você precisa?</legend>
+              <div class="flex flex-wrap gap-2">
+                {['Ração','Remédio ou higiene','Banho e tosa','Aquário','Outro'].map((b, i) => (
+                  <label class="cursor-pointer">
+                    <input type="radio" name="preciso" value={b} class="peer sr-only" checked={i === 0} />
+                    <span class="inline-flex min-h-[48px] items-center px-5 rounded-full bg-ceu-claro font-bold peer-checked:bg-marinho peer-checked:text-white peer-focus-visible:outline-3 peer-focus-visible:outline-aro peer-focus-visible:outline-offset-2 transition-colors">{b}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <label class="grid gap-2 font-bold">Detalhes (marca, quantidade, porte)
+              <textarea name="detalhe" rows="2" maxlength="300" class="rounded-2xl bg-ceu-claro p-4 font-normal text-lg" placeholder="Ex.: ração adulto, saco de 15 kg"></textarea>
+            </label>
+            <div class="grid gap-6 sm:grid-cols-2">
+              <label class="grid gap-2 font-bold">Seu nome
+                <input name="nome" maxlength="60" autocomplete="given-name" class="rounded-2xl bg-ceu-claro p-4 min-h-[52px] font-normal text-lg" />
+              </label>
+              <label class="grid gap-2 font-bold">Bairro para entrega
+                <input name="bairro" maxlength="80" autocomplete="address-level3" class="rounded-2xl bg-ceu-claro p-4 min-h-[52px] font-normal text-lg" />
+              </label>
+            </div>
+            <p id="pedido-resumo" class="sr-only" aria-live="polite"></p>
+            <a id="pedido-enviar" href={zap('Olá, Bicho Forte! Quero fazer um pedido.')} class="btn btn-zap w-full sm:w-auto sm:justify-self-start" data-evento="click_whatsapp">Enviar pedido pelo WhatsApp</a>
+          </form>
+          <div class="dentes" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Folhas empilhadas -->
+  <section class="pagina wrap pb-10" aria-labelledby="tem-h">
+    <h2 id="tem-h" class="rev text-[length:var(--t-xl)] mb-10">O que tem na loja.</h2>
+    {folhas.map((f, i) => (
+      <article class:list={['rounded-t-[28px] sticky min-h-[64svh] lg:min-h-[72svh] grid lg:grid-cols-12', f.cls, f.dark && 'on-dark']} style={`top:${76 + i * 64}px`}>
+        <div class="lg:col-span-5 px-6 sm:px-10 pt-3 pb-8 sm:pb-10 flex flex-col justify-between gap-6">
+          <h3 class="font-display text-[length:var(--t-h3)] leading-none">{f.t}</h3>
+          <div>
+            <p class="text-lg max-w-[40ch]">{f.p}</p>
+            <a href={f.href} class:list={['btn mt-5', f.dark ? 'btn-ceu' : 'btn-marinho']}>Saiba mais</a>
+          </div>
+        </div>
+        <div class:list={['lg:col-span-7 min-h-[240px] lg:min-h-0 relative overflow-hidden', f.contain && 'bg-ceu']}>
+          <Image src={f.img} alt={f.alt} widths={[640, 960, 1200]} sizes="(min-width:1024px) 58vw, 100vw" class:list={['absolute inset-0 w-full h-full', f.contain ? 'object-contain p-6 lg:p-10' : 'object-cover']} style={`object-position:${f.pos}`} loading="lazy" />
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <!-- Dúvidas e como chegar -->
+  <section id="duvidas" class="bg-ceu mt-24" aria-labelledby="duv-h">
+    <div class="pagina wrap grid lg:grid-cols-12 gap-10 py-16 lg:py-24">
+      <div class="lg:col-span-6">
+        <h2 id="duv-h" class="rev text-[length:var(--t-xl)]">Dúvidas frequentes.</h2>
+        <p class="rev mt-5 text-lg" style="--i:1">{n.endereco.rua}, {n.endereco.bairro}, {n.endereco.cidade} – {n.endereco.uf}<br />Segunda a sábado, das 9h às 20h<br />WhatsApp {n.whatsapp.exibir}</p>
+        <div class="mt-8 grid gap-3">
+          {faq.map((f, i) => (
+            <details class="rev group bg-white rounded-[20px] p-5" style={`--i:${i % 3}`} name="faq">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-display text-xl font-semibold min-h-[44px]">
+                {f.q}
+                <svg class="shrink-0 transition-transform group-open:rotate-180" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6l6 6 6-6" stroke="#06174b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <p class="mt-3 text-lg">{f.a}</p>
+            </details>
+          ))}
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={zap()} class="btn btn-zap" data-evento="click_whatsapp">Chamar no WhatsApp</a>
+          <a href="/contato" class="btn btn-marinho">Horários e contato</a>
+        </div>
+      </div>
+      <div class="lg:col-span-6 relative min-h-[360px] lg:min-h-[640px] rounded-[20px] overflow-hidden rev">
+        <Image src={prateleiras} alt="Interior da Bicho Forte: prateleiras com coleiras, guias, potes de petiscos e rações" widths={[640, 960, 1200]} sizes="(min-width:1024px) 48vw, 100vw" class="absolute inset-0 w-full h-full object-cover" style="object-position:30% 60%" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Visita -->
+  <section class="relative overflow-hidden min-h-[560px] lg:min-h-[78svh]" aria-labelledby="vis-h">
+    <Image src={fachada} alt="Fachada da Bicho Forte na Av. Mal. Mallet, 504, com letreiro azul e entrada da loja" widths={[960, 1400, 1800]} sizes="100vw" class="absolute inset-0 w-full h-full object-cover" style="object-position:50% 40%" loading="lazy" />
+    <div class="relative pagina wrap h-full min-h-[560px] lg:min-h-[78svh] flex items-end lg:items-start justify-start lg:justify-end py-8 lg:py-16">
+      <div class="bg-white rounded-[20px] p-6 sm:p-8 w-full max-w-[420px] rev">
+        <h2 id="vis-h" class="text-[length:var(--t-h3)]">Venha nos visitar.</h2>
+        <p class="mt-4 text-lg">{n.endereco.rua}<br />{n.endereco.bairro}, {n.endereco.cidade} – {n.endereco.uf}<br />CEP {n.endereco.cep}</p>
+        <dl class="mt-4 grid grid-cols-[1fr_auto] gap-y-1 text-lg">
+          {n.horario.linhas.map((l) => (<><dt>{l.dias}</dt><dd class="font-bold tabular-nums text-right">{l.horas}</dd></>))}
+        </dl>
+        <p class="mt-4 text-lg"><a href={`tel:${n.telefone.tel}`} class="font-bold" data-evento="click_tel">{n.telefone.exibir}</a></p>
+        <a href={n.rota} class="btn btn-marinho w-full mt-5" rel="noopener noreferrer" target="_blank" data-evento="click_rota">Ver como chegar</a>
+      </div>
+    </div>
+  </section>
+</Base>

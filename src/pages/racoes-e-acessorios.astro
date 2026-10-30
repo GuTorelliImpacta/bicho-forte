@@ -1,0 +1,20 @@
+---
+import Servico from '../layouts/Servico.astro';
+import img from '../assets/loja-racoes.jpg';
+---
+<Servico
+  title="Rações e acessórios em Praia Grande | Bicho Forte"
+  description="Rações embaladas e a granel, coleiras, guias, comedouros e acessórios para cães, gatos, aves, peixes e roedores no Canto do Forte, Praia Grande."
+  path="/racoes-e-acessorios"
+  h1="Rações e acessórios."
+  lead="Para cães, gatos, aves, peixes e roedores, embaladas ou a granel. Veja na loja ou peça pelo WhatsApp."
+  cor="bg-ceu text-marinho"
+  img={img} imgAlt="Corredor de rações da Bicho Forte com prateleiras de produtos" imgPos="35% 50%"
+  mensagem="Olá, Bicho Forte! Quero saber sobre ração."
+  cta="Perguntar sobre ração"
+  secoes={[
+    { h: 'O que você encontra', p: ['Trabalhamos com ração embalada e a granel, além de acessórios do dia a dia.'], lista: ['Rações para cães e gatos', 'Alimentos para aves, peixes e roedores', 'Coleiras, guias e peitorais', 'Comedouros, bebedouros e brinquedos', 'Petiscos e produtos de higiene'] },
+    { h: 'Como escolher a ração do seu cachorro', p: ['Comece pela fase da vida: filhote, adulto ou idoso têm necessidades diferentes. Depois considere o porte, porque grãos e nutrientes variam entre raças pequenas e grandes.', 'Se o seu cachorro tem alergia, sensibilidade ou alguma condição de saúde, converse com um médico-veterinário antes de trocar a ração. Na troca, misture a nova com a antiga aos poucos, ao longo de alguns dias.', 'Orientação geral não substitui consulta com médico-veterinário.'] },
+    { h: 'Peça e receba em casa', p: ['Chame no WhatsApp com a marca, o tamanho do saco e o seu bairro. Confirmamos preço, disponibilidade e entrega pelo Disk Ração.'] },
+  ]}
+/>

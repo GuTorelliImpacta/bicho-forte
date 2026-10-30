@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import negocio from '../data/negocio.json';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import BarraMovel from '../components/BarraMovel.astro';
+
+interface Props { title: string; description: string; path?: string; jsonld?: object[]; }
+const { title, description, path = '', jsonld = [] } = Astro.props;
+const canonical = `${negocio.url}${path}`;
+const og = `${negocio.url}/og.jpg`;
+---
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#6cd4f7" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={negocio.nome} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>document.documentElement.classList.replace('no-js','js')</script>
+    {jsonld.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+  </head>
+  <body>
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:p-3 focus:rounded-lg">Pular para o conteúdo</a>
+    <Nav />
+    <main id="conteudo"><slot /></main>
+    <Footer />
+    <BarraMovel />
+    <script src="../scripts/site.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import Base from './Base.astro';
+import n from '../data/negocio.json';
+import { zap } from '../data/links';
+
+interface Secao { h: string; p: string[]; lista?: string[] }
+interface Props {
+  title: string; description: string; path: string;
+  h1: string; lead: string; cor: string; escuro?: boolean;
+  img: ImageMetadata; imgAlt: string; imgPos?: string; contain?: boolean;
+  mensagem: string; cta: string; secoes: Secao[]; aviso?: string;
+}
+const { title, description, path, h1, lead, cor, escuro, img, imgAlt, imgPos = '50% 50%', contain = false, mensagem, cta, secoes, aviso } = Astro.props;
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: n.url },
+    { '@type': 'ListItem', position: 2, name: h1, item: `${n.url}${path}` },
+  ],
+}];
+---
+<Base title={title} description={description} path={path} jsonld={jsonld}>
+  <section class="pagina wrap pt-1">
+    <div class:list={['rounded-[20px] overflow-hidden grid lg:grid-cols-12', cor, escuro && 'on-dark']}>
+      <div class="lg:col-span-6 p-6 sm:p-12 lg:py-20 flex flex-col justify-center">
+        <h1 class="rev text-[length:var(--t-xl)]">{h1}</h1>
+        <p class="rev mt-5 text-xl max-w-[40ch]" style="--i:1">{lead}</p>
+        <div class="rev mt-7 flex flex-wrap gap-3" style="--i:2">
+          <a href={zap(mensagem)} class="btn btn-zap" data-evento="click_whatsapp">{cta}</a>
+          <a href={`tel:${n.telefone.tel}`} class:list={['btn', escuro ? 'btn-ceu' : 'btn-marinho']} data-evento="click_tel">Ligar {n.telefone.exibir}</a>
+        </div>
+      </div>
+      <div class:list={['lg:col-span-6 relative min-h-[280px] lg:min-h-[480px]', contain && 'bg-ceu']}>
+        <Image src={img} alt={imgAlt} widths={[640, 960, 1200]} sizes="(min-width:1024px) 50vw, 100vw" loading="eager" class:list={['absolute inset-0 w-full h-full', contain ? 'object-contain p-6 lg:p-12' : 'object-cover']} style={`object-position:${imgPos}`} />
+      </div>
+    </div>
+  </section>
+
+  <div class="pagina wrap py-20 lg:py-28 grid gap-16">
+    {secoes.map((s, i) => (
+      <section class="grid lg:grid-cols-12 gap-6 lg:gap-10">
+        <h2 class="rev lg:col-span-5 text-[length:var(--t-h3)]">{s.h}</h2>
+        <div class="rev lg:col-span-7 grid gap-4 text-lg max-w-[62ch]" style="--i:1">
+          {s.p.map((t) => <p>{t}</p>)}
+          {s.lista && (
+            <ul class="grid gap-2 pl-6 list-disc marker:text-ambar">
+              {s.lista.map((t) => <li>{t}</li>)}
+            </ul>
+          )}
+        </div>
+      </section>
+    ))}
+    {aviso && <p class="rounded-[20px] bg-white p-6 text-lg max-w-[70ch]">{aviso}</p>}
+  </div>
+
+  <section class="pagina wrap">
+    <div class="bg-marinho on-dark text-white rounded-[20px] p-8 sm:p-12 grid gap-6 lg:grid-cols-12 items-center">
+      <h2 class="lg:col-span-7 text-[length:var(--t-h3)]">Fale com a Bicho Forte.</h2>
+      <div class="lg:col-span-5 flex flex-wrap gap-3">
+        <a href={zap(mensagem)} class="btn btn-zap" data-evento="click_whatsapp">{cta}</a>
+        <a href="/contato" class="btn btn-ceu">Horários e endereço</a>
+      </div>
+    </div>
+  </section>
+</Base>

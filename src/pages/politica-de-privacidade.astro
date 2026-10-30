@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import n from '../data/negocio.json';
+---
+<Base title="Política de privacidade | Bicho Forte" description="Como o site da Bicho Forte trata seus dados: não coletamos dados por formulário e o pedido é enviado por você ao WhatsApp." path="/politica-de-privacidade">
+  <article class="pagina wrap pt-6 pb-10 grid gap-6 max-w-[820px] text-lg">
+    <h1 class="text-[length:var(--t-xl)]">Política de privacidade.</h1>
+    <p>Este site é informativo. Ele não possui cadastro, login nem armazena dados em servidor próprio.</p>
+    <h2 class="text-[length:var(--t-h3)]">Pedido pelo WhatsApp</h2>
+    <p>No formulário "Monte o seu pedido", o que você digita fica apenas no seu navegador e só é enviado quando você toca em "Enviar pedido pelo WhatsApp", que abre uma conversa com a loja. A partir daí, o WhatsApp trata a mensagem conforme a política dele.</p>
+    <h2 class="text-[length:var(--t-h3)]">Cookies e análise</h2>
+    <p>Não usamos cookies de rastreamento nem mapas incorporados. Os links de rota e Instagram abrem sites de terceiros, com política própria.</p>
+    <h2 class="text-[length:var(--t-h3)]">Contato</h2>
+    <p>Dúvidas sobre dados: WhatsApp {n.whatsapp.exibir} ou telefone {n.telefone.exibir}. {n.nome}, {n.endereco.rua}, {n.endereco.bairro}, {n.endereco.cidade} – {n.endereco.uf}.</p>
+  </article>
+</Base>
